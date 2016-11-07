@@ -1,3 +1,4 @@
+"use strict"
 // class TreeNode
 function TreeNode(val){
 	this.val = val;
@@ -11,19 +12,52 @@ TreeNode.prototype.print = function(){
 // prototype function debug of TreeNode
 // migth not work on the node that doesn't have right o left 
 TreeNode.prototype.debug = function(){
+	
 	console.log(" "+ this.left.val + " " + this.val + " " + this.right.val);
 };
 
-// creating an instance of the tree node
-var root = new TreeNode(80);
-root.right = new TreeNode(95);
-root.left = new TreeNode(59);
-root.left.right = new TreeNode(78);
-root.left.left = new TreeNode(19);
+// inOrderTraversal prototype function
+TreeNode.prototype.inOrderTraversal = function(){
+	if (this){
+		if (this.left){
+			this.left.inOrderTraversal();
+		}
+		this.print();
+		if (this.right){
+			this.right.inOrderTraversal();
+		}
+	}
+};
 
-// printing each tree node
-root.print();
-root.right.print();
-root.left.print();
-root.left.right.print();
-root.left.left.print();
+// preOrderTraversal prototype
+TreeNode.prototype.preOrderTraversal = function(){
+	if (this){
+		this.print();
+		if (this.left){
+			this.left.inOrderTraversal();
+		}
+		if (this.right){
+			this.right.inOrderTraversal();
+		}
+	}
+};
+
+// postOrderTraversal prototype
+TreeNode.prototype.postOrderTraversal = function(){
+	if (this){
+		if (this.left){
+			this.left.inOrderTraversal();
+		}
+		if (this.right){
+			this.right.inOrderTraversal();
+		}
+		this.print();
+	}
+}
+
+// module.exports = {
+// 	tr: TreeNode
+// }
+
+// exports TreeNode class
+module.exports = TreeNode;
